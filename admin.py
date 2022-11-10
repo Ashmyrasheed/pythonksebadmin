@@ -2,6 +2,7 @@ import mysql.connector
 import sys
 import random
 from datetime import date
+from tabulate import tabulate
 try:
     mydb = mysql.connector.connect(host = 'localhost' , user = 'root' , password = '' , database = 'admindb')
     mycursor = mydb.cursor()
@@ -28,8 +29,9 @@ while True:
     
     print("7 view bill")
    
-    print("8 exit")
-
+    print("8 top 2 high bill")
+    
+    print("9 exit")
    
 
     choice = int(input('enter an option:'))
@@ -195,7 +197,23 @@ while True:
         
     elif(choice==7):
         print('view bill')
-    elif(choice == 8):
+        sql = "SELECT c.name,c.address,b.`userid`, b.`month`, b.`year`, b.`bill`, b.`paidstatus`, b.`billdate`, b.`totalunit` FROM `bill` b JOIN consumer c ON b.userid=c.id "
+        mycursor.execute(sql)
+        result = mycursor.fetchall()
+        print(tabulate(result,headers=['name','address','user_id','month','year','bill','paidstatus','billdate','totalunit',],tablefmt = "psql"))
+    elif(choice==8):
+
+        print('Top 2 high bill')
+
+        sql = "SELECT * FROM `bill` ORDER BY `bill`DESC LIMIT 2"
+
+        mycursor.execute(sql)
+
+        result = mycursor.fetchall()
+
+        print(tabulate(result,headers=['id', 'user_id', 'month', 'year', 'bill', 'paidstatus', 'bill date',  'total_unit']))
+        break
+    elif(choice==9):
         break
     
     
