@@ -50,8 +50,8 @@ while True:
             sys.exit("view data error")
         
     elif(choice==2):
-
         print('view consumer')
+        
     
 
     elif(choice==3):
@@ -62,6 +62,19 @@ while True:
     elif(choice==4):
 
         print('update consumer')
+        
+        
+        code=input("enter the consumer code")
+        name=input("enter the name to be updated")
+        address=input("enter the address to be updated")
+        phno=input("enter the ph no to be updated")
+        email=input("enter the email to be updated")
+        sql= "UPDATE `consumer` SET `code`='"+code+"',`name`='"+name+"',`address`='"+address+"',`phno`='"+phno+"',`email`='"+email+"'"
+        mycursor.execute(sql)
+
+        mydb.commit()
+
+        print('Updated sucessfully !!!')
         
 
     elif(choice==5):
