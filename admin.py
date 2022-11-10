@@ -47,7 +47,7 @@ while True:
             mydb.commit()
             print("values insertred successfully")
         except mysql.connector.Error as e:
-            sys.exit("view data error")
+            sys.exit("view data errors")
         
     elif(choice==2):
         print('view consumer')
