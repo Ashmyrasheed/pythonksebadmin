@@ -80,6 +80,13 @@ while True:
     elif(choice==5):
 
             print('delete consumer')
+            code=input("enter the consumer code")
+            sql="DELETE FROM `consumer` WHERE `code`='"+code+"'"
+            mycursor.execute(sql)
+
+            mydb.commit()
+            print("data deleted succesfully")
+            
         
 
     elif(choice==6):
