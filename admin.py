@@ -127,7 +127,6 @@ while True:
             code=input("enter the consumer code")
             sql="DELETE FROM `consumer` WHERE `code`='"+code+"'"
             mycursor.execute(sql)
-
             mydb.commit()
             print("data deleted succesfully")
             
@@ -137,6 +136,51 @@ while True:
         
 
         print('Generate bill')
+        code=input("enter the consumer code")
+
+        sql="SELECT `id` FROM `consumer` WHERE `code`='"+code+"'"
+
+        mycursor.execute(sql)
+
+        result=mycursor.fetchall()
+
+        for i in result:
+
+            a=i[0]
+
+            print(a)
+
+        month=11  
+        year=2022  
+
+        sql="SELECT SUM(unit) FROM `usages` WHERE `userid`='"+str(a)+"' AND MONTH(datetime)='"+str(month)+"' AND YEAR(datetime)='"+str(year)+"'"
+
+        mycursor.execute(sql)
+
+        result=mycursor.fetchone()
+
+        unit=(result[0])
+
+        print(result)
+
+            
+
+        total_bill=int(str(result[0])) * 5
+
+        print(total_bill)
+
+        
+
+        sql="INSERT INTO `bill`(`userid`, `month`, `year`, `bill`, `paidstatus`, `billdate`, `totalunit`) VALUES (%s,%s,%s,%s,%s,now(),%s)"
+
+        data = (str(a),str(month),str(year),total_bill,'0',unit)
+
+        mycursor.execute(sql,data)
+
+        mydb.commit()
+
+        print("Bill inserted successfully.")
+        break
 
        
     elif(choice==7):
@@ -147,3 +191,6 @@ while True:
 
     elif(choice == 8):
         break
+    
+    
+    
