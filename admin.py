@@ -51,7 +51,14 @@ while True:
         
     elif(choice==2):
         print('view consumer')
-        
+        try:
+            sql="SELECT  `code`, `name`, `address`, `phno`, `email` FROM `consumer`"
+            mycursor.execute(sql)
+            result=mycursor.fetchall()
+            for i in result:
+                print(i)
+        except mysql.connector.Error as e:
+            sys.exit("view data error")
     
 
     elif(choice==3):
@@ -99,14 +106,7 @@ while True:
          
 
         print('view bill')
-        try:
-            sql="SELECT  `code`, `name`, `address`, `phno`, `email` FROM `consumer`"
-            mycursor.execute(sql)
-            result=mycursor.fetchall()
-            for i in result:
-                print(i)
-        except mysql.connector.Error as e:
-            sys.exit("view data error")
+        
 
     elif(choice == 8):
         break
