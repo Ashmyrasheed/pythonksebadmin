@@ -63,8 +63,45 @@ while True:
 
     elif(choice==3):
 
-        print('search consumer')
-        
+        print('search consumer selected')
+
+        print("1.search by consumer name")
+
+        print("2.search by consumer code")
+
+        print("3.search by consumer phone number")
+
+        choice1 = int(input('enter an option:'))
+
+        if(choice1==1):
+
+            print("consumer details")
+
+            name=input("enter the name ")
+
+            sql="SELECT `code`, `name`, `address`, `phno`, `email` FROM `consumer` WHERE `name`='"+name+"'"
+
+        elif(choice1==2):
+
+            code=input("enter the consumer code")
+
+            sql="SELECT `code`, `name`, `address`, `phno`, `email` FROM `consumer` WHERE `code` ='"+code+"'"
+
+        elif(choice1==3):
+
+            phno=input("enter the phone number")
+
+            sql="SELECT `code`, `name`, `address`, `phno`, `email` FROM `consumer` WHERE `phno`='"+phno+"'"
+
+        mycursor.execute(sql)
+
+        result=mycursor.fetchall()
+
+        print(result)
+
+        break
+             
+            
     
     elif(choice==4):
 
